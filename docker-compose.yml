@@ -3,16 +3,16 @@ version: "3.9"
 services:
   web:
     build: .
-#    command: gunicorn django_project.wsgi -b 0.0.0.0:8000
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn django_project.wsgi -b 0.0.0.0:8000
     volumes:
       - .:/repositories:Z
     ports:
       - 8000:8000
     depends_on:
       - db
-#    environment:
-#      - "DJANGO_SECRET_KEY=twfEqm68oqIrxYxflNvRFooGCkBxbQC6CsIiYnX9IXY55OAQ07k"
+    environment:
+      - "DJANGO_SECRET_KEY=django-insecure-aujsk&3mt2w4r-0vkvzzuk)jhx(b-c5$j^qc4#ecz2t_8hwgq-"
+      - "DJANGO-DEBUG=True"
 
   db:
     image: postgres:13
