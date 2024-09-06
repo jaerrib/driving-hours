@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+
+{% block title %}Driving log{% endblock title %}
+
+{% block content %}
+    {% for drive in object_list %}
+        <div>
+            <h2><a href="">{{ drive.id }}</a></h2>
+        </div>
+    {% endfor %}
+{% endblock content %}
