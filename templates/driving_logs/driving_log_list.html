@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+    <h1>List of Driver Logs</h1>
+    {% if drivinglog_list %}
+        {% for driving_log in drivinglog_list %}
+            <p>
+                <a href="{% url 'driving_log_detail' driving_log.pk %}">{{ driving_log.name }}</a>
+                | {{ driving_log.total_hours_needed }}
+                | {{ driving_log.night_hours_needed }}
+                | {{ driving_log.inclement_weather_hours_needed }}</p>
+        {% endfor %}
+    {% else %}
+        <a href="">Create a Driving Log</a>
+    {% endif %}
+{% endblock content %}
