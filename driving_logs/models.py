@@ -13,7 +13,7 @@ class DrivingLog(models.Model):
     creator = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     def get_absolute_url(self):
         return reverse("driving_log_detail", args=[str(self.id)])
@@ -30,7 +30,7 @@ class Drive(models.Model):
     creator = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     def get_absolute_url(self):
         return reverse("drive_detail", args=[str(self.id)])
