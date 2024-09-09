@@ -4,8 +4,10 @@
 
 {% block content %}
     <h1>Driving Log Detail</h1>
+    <a href="{% url 'drive_new' driving_log_pk %}">Add New Drive</a>
     {% for drive in drive_list %}
-        <p>{{ drive.date }} - {{ drive.hours }} hours and {{ drive.minutes }}
+        <p><a href="{{ drive.get_absolute_url }}">{{ drive.date }}</a>
+            - {{ drive.hours }} hours and {{ drive.minutes }}
             minutes
             {% if drive.night %}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

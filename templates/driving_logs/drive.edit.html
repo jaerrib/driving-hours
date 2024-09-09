@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
-{% block title %}New Drive{% endblock title %}
+{% block title %}Edit Drive{% endblock title %}
 
 {% block content %}
-    <h1>New Drive</h1>
+    <h1>Edit Drive</h1>
     <form action="" method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-success">Update</button>
     </form>
 {% endblock content %}

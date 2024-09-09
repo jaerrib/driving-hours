@@ -1,0 +1,12 @@
+{% extends "_base.html" %}
+
+{% block title %}Drive Detail{% endblock title %}
+
+{% block content %}
+    <h1>Drive Detail for {{ drive.date }}</h1>
+    <p>Time: {{ drive.hours }} hours and {{ drive.minutes }} minutes</p>
+    <p>Night: {{ drive.night }}</p>
+    <p>Inclement weather: {{ drive.inclement_weather }}</p>
+    <a href="{% url 'drive_edit' drive.id %}">Edit Drive</a> |
+    <a href="{% url 'drive_delete' drive.id %}">Delete Drive</a>
+{% endblock content %}
