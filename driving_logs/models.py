@@ -22,6 +22,7 @@ class DrivingLog(models.Model):
 
 class Drive(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=255, blank=True, null=True)
     date = models.DateField(auto_now=False)
     hours = models.IntegerField(default=0, blank=True, null=True)
     minutes = models.IntegerField(default=0, blank=True, null=True)
