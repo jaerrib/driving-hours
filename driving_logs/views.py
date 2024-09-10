@@ -1,11 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import (
-    DriveCreateForm,
-)
+from .forms import DriveCreateForm, DriveUpdateForm
 from .models import Drive, DrivingLog
 
 
@@ -43,7 +41,7 @@ class DrivingLogDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class DriveCreateView(CreateView):
+class DriveCreateView(LoginRequiredMixin, CreateView):
     model = Drive
     form_class = DriveCreateForm
     template_name = "driving_logs/drive_new.html"
@@ -58,19 +56,35 @@ class DriveCreateView(CreateView):
         return reverse_lazy("driving_log_detail", kwargs={"param": param})
 
     def get_queryset(self):
-        return DrivingLog.objects.filter(pk=self.kwargs["driving_log_pk"])
+        return DrivingLog.objects.filter(pk=self.kwargs["pk"])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["form"] = DriveCreateForm()
-        context["driving_log"] = DrivingLog.objects.get(
-            pk=self.kwargs["driving_log_pk"]
-        )
+        context["driving_log"] = DrivingLog.objects.get(pk=self.kwargs["pk"])
         return context
 
     def form_valid(self, form):
-        form.instance.todo_list = DrivingLog.objects.get(
-            pk=self.kwargs["driving_log_pk"]
-        )
+        form.instance.driving_log = DrivingLog.objects.filter(pk=self.kwargs["pk"])
         form.instance.creator = self.request.user
         return super().form_valid(form)
+
+
+class DriveUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Drive
+    form_class = DriveUpdateForm
+    template_name = "driving_logs/drive_edit.html"
+
+    def get_success_url(self):
+        driving_log_pk = self.object.driving_log_id
+        return reverse("driving_log_detail", kwargs={"pk": driving_log_pk})
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user
+
+
+class DriveDeleteView(DeleteView):
+    model = Drive
+    template_name = "driving_logs/drive_delete.html"
+    success_url = reverse_lazy("driving_log_list")
