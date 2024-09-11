@@ -3,7 +3,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .forms import DriveCreateForm, DriveUpdateForm
+from .forms import DriveCreateForm, DriveUpdateForm, DrivingLogCreateForm
 from .models import Drive, DrivingLog
 
 
@@ -39,6 +39,16 @@ class DrivingLogDetailView(LoginRequiredMixin, DetailView):
         context["drive_list"] = Drive.objects.filter(driving_log=driving_log)
         context["driving_log_pk"] = driving_log.pk
         return context
+
+
+class DrivingLogCreateView(LoginRequiredMixin, CreateView):
+    model = DrivingLog
+    form_class = DrivingLogCreateForm
+    template_name = "driving_logs/driving_log_new.html"
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
 
 
 class DriveCreateView(LoginRequiredMixin, CreateView):

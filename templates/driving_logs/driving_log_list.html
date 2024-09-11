@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>List of Driver Logs</h1>
+    <a href="{% url 'driving_log_new' %}">Create a Driving Log</a>
     {% if drivinglog_list %}
         {% for driving_log in drivinglog_list %}
             <p>
@@ -13,6 +14,6 @@
                 | {{ driving_log.inclement_weather_hours_needed }}</p>
         {% endfor %}
     {% else %}
-        <a href="">Create a Driving Log</a>
+        <p>You have no logs</p>
     {% endif %}
 {% endblock content %}
