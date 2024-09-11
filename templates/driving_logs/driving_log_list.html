@@ -11,7 +11,10 @@
                 <a href="{% url 'driving_log_detail' driving_log.pk %}">{{ driving_log.name }}</a>
                 | {{ driving_log.total_hours_needed }}
                 | {{ driving_log.night_hours_needed }}
-                | {{ driving_log.inclement_weather_hours_needed }}</p>
+                | {{ driving_log.inclement_weather_hours_needed }}
+                -- <a
+                    href="{% url 'driving_log_edit' driving_log.pk %}">EDIT</a>
+            </p>
         {% endfor %}
     {% else %}
         <p>You have no logs</p>

@@ -3,6 +3,7 @@ from django.urls import path
 from .views import (
     DrivingLogDetailView,
     DrivingLogCreateView,
+    DrivingLogUpdateView,
     DrivingLogListView,
     DriveDetailView,
     DriveCreateView,
@@ -12,6 +13,7 @@ from .views import (
 
 urlpatterns = [
     path("new/", DrivingLogCreateView.as_view(), name="driving_log_new"),
+    path("<uuid:pk>/edit/", DrivingLogUpdateView.as_view(), name="driving_log_edit"),
     path("<uuid:pk>/", DrivingLogDetailView.as_view(), name="driving_log_detail"),
     path("", DrivingLogListView.as_view(), name="driving_log_list"),
     path("drives/<uuid:pk>/", DriveDetailView.as_view(), name="drive_detail"),
