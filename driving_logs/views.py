@@ -81,7 +81,7 @@ class DriveCreateView(LoginRequiredMixin, CreateView):
         return reverse_lazy("driving_log_detail", kwargs={"param": param})
 
     def get_queryset(self):
-        return DrivingLog.objects.filter(pk=self.kwargs["pk"])
+        return DrivingLog.objects.filter(pk=self.kwargs["driving_log_pk"])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -90,7 +90,7 @@ class DriveCreateView(LoginRequiredMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        form.instance.driving_log = DrivingLog.objects.filter(pk=self.kwargs["pk"])
+        form.instance.driving_log = DrivingLog.objects.get(pk=self.kwargs["pk"])
         form.instance.creator = self.request.user
         return super().form_valid(form)
 

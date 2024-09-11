@@ -21,7 +21,6 @@ class DriveCreateForm(ModelForm):
             "minutes",
             "night",
             "inclement_weather",
-            "driving_log",
         ]
         widgets = {
             "date": DateInput(),
