@@ -19,5 +19,5 @@ urlpatterns = [
     path("drives/<uuid:pk>/", DriveDetailView.as_view(), name="drive_detail"),
     path("<uuid:pk>/drives/new/", DriveCreateView.as_view(), name="drive_new"),
     path("drives/<uuid:pk>/edit/", DriveUpdateView.as_view(), name="drive_edit"),
-    path("drives/<uuid:pk>/edit/", DriveDeleteView.as_view(), name="drive_delete"),
+    path("drives/<uuid:pk>/delete/", DriveDeleteView.as_view(), name="drive_delete"),
 ]
