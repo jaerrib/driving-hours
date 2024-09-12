@@ -16,6 +16,7 @@ class DriveCreateForm(ModelForm):
     class Meta:
         model = Drive
         fields = [
+            "name",
             "date",
             "hours",
             "minutes",
@@ -33,6 +34,7 @@ class DriveUpdateForm(ModelForm):
     class Meta:
         model = Drive
         fields = [
+            "name",
             "date",
             "hours",
             "minutes",
