@@ -26,19 +26,28 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0 nav-underline">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}">Log
+                        <a class="nav-link"
+                           href="{% url 'driving_log_list' %}">
+                            Driving Log List
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{% url 'account_logout' %}">Log
                             Out</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">Log
+                        <a class="nav-link"
+                           href="{% url 'account_login' %}">Log
                             In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
+                        <a class="nav-link"
+                           href="{% url 'account_signup' %}">Signup</a>
                     </li>
                 {% endif %}
             </ul>
