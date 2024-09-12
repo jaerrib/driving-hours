@@ -4,7 +4,11 @@
 {% block title %}New Drive{% endblock title %}
 
 {% block content %}
-    <h1>New Drive</h1>
+    <h1>Add a new drive to your log</h1>
+    <p class="text-secondary">Provide a creative name or just make a note about
+        your destination to make it easier to recall where you went, then add a
+        date, the amount of time you drove, and select if you drove at night or
+        in inclement weather.</p>
     <form action="" method="post">
         {% csrf_token %}
         {{ form|crispy }}

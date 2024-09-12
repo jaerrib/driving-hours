@@ -4,7 +4,9 @@
 {% block title %}Edit Drive{% endblock title %}
 
 {% block content %}
-    <h1>Edit Drive</h1>
+    <h1>Edit the details of your drive</h1>
+    <p class="text-secondary">Did you choose the wrong date or make a mistake on
+        how long you drove? Change the information and save it!</p>
     <form action="" method="post">
         {% csrf_token %}
         {{ form|crispy }}
