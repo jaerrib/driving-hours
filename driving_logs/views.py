@@ -66,6 +66,12 @@ class DrivingLogUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
+class DrivingLogDeleteView(DeleteView):
+    model = DrivingLog
+    template_name = "driving_logs/driving_log_delete.html"
+    success_url = reverse_lazy("driving_log_list")
+
+
 class DriveCreateView(LoginRequiredMixin, CreateView):
     model = Drive
     form_class = DriveCreateForm
@@ -109,7 +115,14 @@ class DriveUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return obj.creator == self.request.user
 
 
-class DriveDeleteView(DeleteView):
+class DriveDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Drive
     template_name = "driving_logs/drive_delete.html"
-    success_url = reverse_lazy("driving_log_list")
+
+    def get_success_url(self):
+        driving_log_pk = self.object.driving_log_id
+        return reverse("driving_log_detail", kwargs={"pk": driving_log_pk})
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user
