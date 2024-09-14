@@ -42,6 +42,19 @@ class DrivingLogDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         driving_log = self.get_object()
         context["drive_list"] = Drive.objects.filter(driving_log=driving_log)
+
+        hours = 0
+        minutes = 0
+        for log in context["drive_list"]:
+            hours += log.hours
+            minutes += log.minutes
+        hours += minutes // 60
+        minutes = minutes % 60
+        context["drive_totals"] = {
+            "hours": hours,
+            "minutes": minutes,
+        }
+        context["driving_log"] = driving_log
         context["driving_log_pk"] = driving_log.pk
         return context
 

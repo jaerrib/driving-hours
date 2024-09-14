@@ -4,6 +4,8 @@
 
 {% block content %}
     <h1>Driving Log Detail</h1>
+    <h2>Requirements:</h2>
+    <p>TOTAL: {{ driving_log.total_hours_needed }} hours | NIGHT: {{ driving_log.night_hours_needed }} hours | INCLEMENT WEATHER: {{ driving_log.inclement_weather_hours_needed }} hours </p>
     <a href="{% url 'drive_new' driving_log_pk %}">Add New Drive</a>
     {% for drive in drive_list %}
         <p><a href="{{ drive.get_absolute_url }}">{{ drive.name }}</a>
@@ -29,4 +31,7 @@
         </p>
 
     {% endfor %}
+    <div>
+        <p>TOTAL DRIVE TIME: {{ drive_totals.hours}} hours and {{ drive_totals.minutes}} minutes</p>
+    </div>
 {% endblock content %}
