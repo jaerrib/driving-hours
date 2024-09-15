@@ -10,11 +10,13 @@
     {% if drivinglog_list %}
         <table class="table">
             <thead>
-                <th scope="col">Name</th>
-                <th scope="col">Total Hours</th>
-                <th scope="col">Night Hours</th>
-                <th scope="col">Inclement Weather Hours</th>
-                <th scope="col">Actions</th>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Total Hours</th>
+                    <th scope="col">Night Hours</th>
+                    <th scope="col">Inclement Weather Hours</th>
+                </tr>
+                    <th scope="col">Actions</th>
             </thead>
             <tbody>
                 {% for driving_log in drivinglog_list %}
