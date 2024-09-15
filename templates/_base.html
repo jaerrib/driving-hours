@@ -11,7 +11,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -30,7 +30,7 @@
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'driving_log_list' %}">
-                            Driving Log List
+                            My Driving Logs
                         </a>
                     </li>
                     <li class="nav-item">
