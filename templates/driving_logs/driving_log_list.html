@@ -20,7 +20,7 @@
             </thead>
             <tbody>
                 {% for driving_log in drivinglog_list %}
-                <tr scope="row">
+                <tr>
                     <td><a href="{% url 'driving_log_detail' driving_log.pk %}">{{ driving_log.name }}</a></td>
                     <td>{{ driving_log.total_hours_needed }}</td>
                     <td>{{ driving_log.night_hours_needed }}</td>
