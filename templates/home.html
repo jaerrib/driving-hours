@@ -3,14 +3,10 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-    <h1>Driver Log</h1>
-    {% if user.is_authenticated %}
-        <p>Hi {{ user.email }}</p>
-        <p><a href="{% url 'account_logout' %}">Logout</a></p>
-        <p><a href="{% url 'driving_log_list' %}">See Driving Log List</a></p>
-    {% else %}
-        <p>You are not logged in</p>
-        <a href="{% url 'account_login' %}">Log In</a>
-        <a href="{% url 'account_signup' %}">Sign Up</a>
-    {% endif %}
+    <h1>Overview</h1>
+    <p>This application is designed to help your driving hours while you build the skills necessary for taking your junior license road test.</p>
+    <p>Signing up for an account is easy. After that, set up a driving log with your state's hour requirements, including any night or inclement weather specifications. Once your log is set up, you can begin adding your drive times.</p>
+    <hr>
+    <h2>Additional Notes</h2>
+    <p>This is an open source application built by John Beers using the <a href="https://www.djangoproject.com/" target="_blank">Django web framework</a>. The code is developed on <a href="https://codeberg.org/jaerrib/driving-hours" target="_blank">Codeberg</a> and mirrored on <a href="https://github.com/jaerrib/driving-hours" target="_blank">GitHub</a>.</p>
 {% endblock content %}
