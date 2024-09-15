@@ -1,23 +1,37 @@
 {% extends "_base.html" %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Driving Logs{% endblock title %}
 
 {% block content %}
-    <h1>List of Driver Logs</h1>
-    <a href="{% url 'driving_log_new' %}">Create a Driving Log</a>
+    <h1>My Driving Logs</h1>
+    <p>Hi, {{ user }}! Here you can manage your driving logs. You'll likely only need one, but you're free to create as many as you'd like!</p>
+    <a href="{% url 'driving_log_new' %}" class="btn btn-primary">Create a Driving Log</a>
+    <hr class="my-3">
     {% if drivinglog_list %}
-        {% for driving_log in drivinglog_list %}
-            <p>
-                <a href="{% url 'driving_log_detail' driving_log.pk %}">{{ driving_log.name }}</a>
-                | {{ driving_log.total_hours_needed }}
-                | {{ driving_log.night_hours_needed }}
-                | {{ driving_log.inclement_weather_hours_needed }}
-                -- <a
-                    href="{% url 'driving_log_edit' driving_log.pk %}">EDIT</a>
-                |
-                <a href="{% url 'driving_log_delete' driving_log.pk %}">DELETE</a>
-            </p>
-        {% endfor %}
+        <table class="table">
+            <thead>
+                <th scope="col">Name</th>
+                <th scope="col">Total Hours</th>
+                <th scope="col">Night Hours</th>
+                <th scope="col">Inclement Weather Hours</th>
+                <th scope="col">Actions</th>
+            </thead>
+            <tbody>
+                {% for driving_log in drivinglog_list %}
+                <tr scope="row">
+                    <td><a href="{% url 'driving_log_detail' driving_log.pk %}">{{ driving_log.name }}</a></td>
+                    <td>{{ driving_log.total_hours_needed }}</td>
+                    <td>{{ driving_log.night_hours_needed }}</td>
+                    <td>{{ driving_log.inclement_weather_hours_needed }}</td>
+                    <td><a
+                        href="{% url 'driving_log_edit' driving_log.pk %}">EDIT</a>
+                        |
+                        <a href="{% url 'driving_log_delete' driving_log.pk %}">DELETE</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     {% else %}
         <p>You have no logs</p>
     {% endif %}
