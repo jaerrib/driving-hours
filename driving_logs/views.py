@@ -41,7 +41,7 @@ class DrivingLogDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         driving_log = self.get_object()
-        context["drive_list"] = Drive.objects.filter(driving_log=driving_log)
+        context["drive_list"] = Drive.objects.filter(driving_log=driving_log).order_by("-date")
         hours = 0
         minutes = 0
         night_hours = 0
