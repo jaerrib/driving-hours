@@ -4,11 +4,10 @@
 
 {% block content %}
     <h1>My Driving Logs</h1>
-    <p>Hi, {{ user }}! Here you can manage your driving logs. You'll likely only need one, but you're free to create as many as you'd like!</p>
-    <a href="{% url 'driving_log_new' %}" class="btn btn-primary">Create a Driving Log</a>
-    <hr class="my-3">
+    <p class="text-secondary">Hi, {{ user }}! Here you can manage your driving logs. You'll likely only need one, but you're free to create as many as you'd like!</p>
+    <a href="{% url 'driving_log_new' %}" class="btn btn-primary">Create a driving log</a>
     {% if drivinglog_list %}
-        <table class="table">
+        <table class="table table-striped mt-3">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
@@ -18,7 +17,7 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 {% for driving_log in drivinglog_list %}
                 <tr>
                     <td><a href="{% url 'driving_log_detail' driving_log.pk %}">{{ driving_log.name }}</a></td>
