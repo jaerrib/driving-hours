@@ -24,13 +24,19 @@ env.read_env()
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("DJANGO_SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "driving-hours.fly.dev",
+    "localhost",
+    "127.0.0.1",
+    "0.0.0.0",
+]
 
+CSRF_TRUSTED_ORIGINS = ["https://driving-hours.fly.dev"]
 
 # Application definition
 
