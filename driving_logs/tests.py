@@ -52,6 +52,30 @@ class DrivingLogTests(TestCase):
         )
         self.assertContains(response, "Log In")
 
+    def test_driving_log_detail_for_logged_in_user(self):
+        self.client.login(email="testuser@email.com", password="testpass123")
+        response = self.client.get(self.driving_log.get_absolute_url())
+        no_response = self.client.get("/driving_logs/12345/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(no_response.status_code, 404)
+        self.assertContains(response, "Test Drive")
+        self.assertTemplateUsed(response, "driving_logs/driving_log_detail.html")
+
+    def test_driving_log_detail_for_logged_out_user(self):
+        self.client.logout()
+        response = self.client.get(self.driving_log.get_absolute_url())
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            f"%s?next=/driving_logs/{self.driving_log.pk}/"
+            % (reverse("account_login")),
+        )
+        response = self.client.get(
+            f"%s?next=/driving_logs/{self.driving_log.pk}/"
+            % (reverse("account_login")),
+        )
+        self.assertContains(response, "Log In")
+
     def test_driving_log_data(self):
         self.assertEqual(self.driving_log.name, "Test Log")
         self.assertEqual(self.driving_log.total_hours_needed, 65)
