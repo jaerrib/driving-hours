@@ -41,7 +41,9 @@ class DrivingLogDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         driving_log = self.get_object()
-        context["drive_list"] = Drive.objects.filter(driving_log=driving_log).order_by("-date")
+        context["drive_list"] = Drive.objects.filter(driving_log=driving_log).order_by(
+            "-date"
+        )
         hours = 0
         minutes = 0
         night_hours = 0
@@ -86,7 +88,7 @@ class DrivingLogCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class DrivingLogUpdateView(LoginRequiredMixin, UpdateView):
+class DrivingLogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = DrivingLog
     form_class = DrivingLogUpdateForm
     template_name = "driving_logs/driving_log_edit.html"
@@ -96,10 +98,14 @@ class DrivingLogUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class DrivingLogDeleteView(DeleteView):
+class DrivingLogDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = DrivingLog
     template_name = "driving_logs/driving_log_delete.html"
     success_url = reverse_lazy("driving_log_list")
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.creator == self.request.user
 
 
 class DriveCreateView(LoginRequiredMixin, CreateView):
